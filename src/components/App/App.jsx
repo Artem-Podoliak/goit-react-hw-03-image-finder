@@ -96,11 +96,7 @@ class App extends Component {
   };
 
   onLoadBtnClick = () => {
-    const { totalImages, imagesSet } = this.state;
-
-    if (totalImages > imagesSet.length) {
-      this.setState(prevState => ({ page: prevState.page + 1 }));
-    }
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   toggleModal = largeImageURL => {
