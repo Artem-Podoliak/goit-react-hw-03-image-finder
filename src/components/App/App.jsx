@@ -46,19 +46,13 @@ class App extends Component {
           }
 
           if (nextPage === 1) {
-            this.setState({
-              imagesSet: hits,
-              totalImages: totalHits,
-              status: Status.RESOLVED,
-            });
             this.showSearchResult(totalHits);
-          } else {
-            this.setState(prevState => ({
-              imagesSet: [...prevState.imagesSet, ...hits],
-              status: Status.RESOLVED,
-            }));
-            this.makeSmoothScroll();
           }
+          this.setState(prevState => ({
+            imagesSet: [...prevState.imagesSet, ...hits],
+            status: Status.RESOLVED,
+          }));
+          this.makeSmoothScroll();
         })
         .catch(error => {
           console.log(error);
@@ -70,9 +64,7 @@ class App extends Component {
 
   rejectedStatusHandler = () => {
     this.setState({ status: Status.REJECTED });
-    setTimeout(() => {
-      this.setState({ status: Status.IDLE });
-    }, 2500);
+    this.setState({ status: Status.IDLE });
   };
 
   showSearchResult = totalImages => {
