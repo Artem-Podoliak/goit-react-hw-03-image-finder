@@ -68,7 +68,7 @@ class App extends Component {
 
   rejectedStatusHandler = () => {
     this.setState({ status: Status.REJECTED });
-    this.setState({ status: Status.IDLE });
+    // this.setState({ status: Status.IDLE });
   };
 
   showSearchResult = totalImages => {
