@@ -28,6 +28,7 @@ class App extends Component {
     largeImageURL: '',
     showModal: false,
     status: Status.IDLE,
+    showBtn: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -48,9 +49,12 @@ class App extends Component {
           if (nextPage === 1) {
             this.showSearchResult(totalHits);
           }
+          const showBtn = nextPage < Math.ceil(totalHits / 12);
+
           this.setState(prevState => ({
             imagesSet: [...prevState.imagesSet, ...hits],
             status: Status.RESOLVED,
+            showBtn,
           }));
           this.makeSmoothScroll();
         })
@@ -114,8 +118,8 @@ class App extends Component {
       largeImageURL,
       showModal,
       status,
+      showBtn,
     } = this.state;
-
     return (
       <AppWrapper>
         <Searchbar onSubmit={this.onFormSubmit} />
@@ -133,7 +137,7 @@ class App extends Component {
               }}
             />
 
-            {totalImages > imagesSet.length && (
+            {totalImages < imagesSet.length && showBtn && (
               <Button onClick={this.onLoadBtnClick} />
             )}
 
